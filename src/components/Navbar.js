@@ -11,9 +11,9 @@ const USER_IMAGE =
 function Navbar() {
   const router = useRouter();
   const { data: session } = useSession();
-  //console.log("Session", session);
+
   return (
-    <div className="flex justify-between p-6 border-b-[2px] border-gray-300 rounded-xl">
+    <div className="flex justify-between xl:justify-around p-6 shadow-sm shadow-slate-200 rounded-xl">
       <Link href="/" className="flex items-center gap-2 sm:gap-4">
         <Image
           src="/logo.png"
@@ -23,12 +23,14 @@ function Navbar() {
           quality={75}
           className="w-10 sm:w-16"
         />{" "}
-        <span className="sm:text-2xl text-orange-600 font-bold">playPal</span>
+        <span className="sm:text-2xl text-[#0356fc] hover:text-[#0339a3] font-bold">
+          playPal
+        </span>
       </Link>
       <div className="flex items-center gap-2 sm:gap-3">
         {session ? (
           <button
-            className="bg-zinc-800 px-4 text-[.7rem] text-white font-semibold rounded-full h-9 sm:h-10 hover:bg-zinc-900"
+            className="bg-zinc-800 px-4 text-[.8rem] text-white font-bold rounded-full h-9 sm:h-10 hover:bg-zinc-900"
             onClick={() => router.push("/create-post")}
           >
             <span className="hidden sm:block"> Create New Post</span>{" "}
@@ -39,7 +41,7 @@ function Navbar() {
         )}
         {!session ? (
           <button
-            className="bg-orange-600 text-[.7rem] text-white font-semibold px-4 rounded-full sm:h-10 hover:bg-orange-700"
+            className="bg-[#0356fc] text-[.8rem] text-white font-bold px-4 rounded-full h-9 sm:h-10 hover:bg-[#0339a3]"
             onClick={() => signIn()}
           >
             <span className="hidden sm:block">Sign In</span>{" "}
@@ -48,7 +50,7 @@ function Navbar() {
         ) : (
           <>
             <button
-              className="bg-orange-600 text-[.7rem] text-white font-semibold px-4 rounded-full h-9 sm:h-10 hover:bg-orange-700"
+              className="bg-[#0356fc] text-[.8rem] text-white font-bold px-4 rounded-full h-9 sm:h-10 hover:hover:bg-[#0339a3]"
               onClick={() => signOut()}
             >
               <span className="hidden sm:block">Sign Out</span>{" "}
@@ -59,7 +61,8 @@ function Navbar() {
               alt="user_pic"
               width={47}
               height={47}
-              className="w-9 sm:w-10 rounded-full"
+              className="w-9 sm:w-10 rounded-full cursor-pointer"
+              onClick={() => router.push("/profile")}
             />
           </>
         )}

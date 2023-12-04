@@ -1,59 +1,60 @@
-import { CalendarRange, MapIcon, MapPin } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
+import { useRouter } from "next/router";
+import { PiMapPinLineDuotone } from "react-icons/pi";
 
 function PostItem({ post }) {
-  ///console.log("This is a post:", post);
+  const router = useRouter();
 
   return (
-    <div className="">
+    <div>
       {post ? (
-        <div className="max-w-sm border-2 border-gray-300 rounded-lg shadow h-full w-[30rem]">
-          <Image
-            className="rounded-t-lg object-cover w-full h-[12rem]"
-            src={post.image}
-            alt="activity image"
-            width={400}
-            height={400}
-          />
-          <div className="p-5 text-start">
+        <div className="max-w-sm border-2 border-slate-300 rounded-lg shadow-sm h-full sm:w-[30rem]">
+          <div className="mx-auto p-2">
+            <Image
+              className="rounded-md object-cover w-full h-[12rem] shadow-lg shadow-slate-400"
+              src={post.image}
+              alt="activity image"
+              width={400}
+              height={400}
+            />
+          </div>
+          <div className="p-6 text-start">
             <h5 className="mb-2 text-2xl font-bold text-gray-900">
               {post.title}
             </h5>
-            <div className="flex gap-2 items-center">
-              <CalendarRange stroke="#f97316" className="text-lg" /> 07/14/2013
-            </div>
-            <div className="flex gap-1 items-center py-2 font-semibold">
+
+            <div className="text-sm flex gap-1 justify-start items-center py-2 font-semibold">
               {" "}
-              <MapPin stroke="#f97316" className="text-lg" /> {post.location},{" "}
-              {post.zipcode}
+              <PiMapPinLineDuotone fill="#0356fc" size={20} /> {post.location},{" "}
+              {post.zipCode}
             </div>
-            <p className="font-semibold text-gray-500 line-clamp-3 text-ellipsis">
+            <p className="font-semibold text-slate-500 line-clamp-3 text-ellipsis text-sm">
               {post.desc}
             </p>
-            <div className="flex flex-wrap gap-2 my-5">
+            <div className="flex flex-wrap justify-start gap-2 mt-6 mb-8">
               {post.tags.map((tag, indx) => {
                 return (
                   <div
                     key={indx}
-                    className="py-1 px-3 text-[0.7rem] text-orange-600 rounded-lg font-bold border border-gray-400"
+                    className="py-1 px-3 text-[0.7rem] text-black rounded-lg font-semibold bg-slate-100 border-2 border-slate-300 shadow-sm"
                   >
                     {tag}
                   </div>
                 );
               })}
             </div>
-            <Link
-              href={{ pathname: "/details/", query: post }}
-              className="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full lg:w-auto px-5 py-2.5 text-center"
-              //   onClick={() => {
-              //     <PostDetail post={post} />;
-              //     console.log("clicked post:", post);
-              //   }}
-            >
-              Explore
-            </Link>
+
+            <div className="flex gap-2 justify-between">
+              <button
+                onClick={() =>
+                  router.push({ pathname: "/details", query: post })
+                }
+                className="text-white bg-[#0356fc] hover:bg-[#0339a3] focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-xs font-semibold w-full lg:w-auto px-5 py-2.5 text-center "
+              >
+                Explore
+              </button>
+            </div>
           </div>
         </div>
       ) : (

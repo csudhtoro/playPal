@@ -1,43 +1,43 @@
 const GameList = [
   {
     id: 1,
+    name: "All",
+    image: "/images/all.png"
+  },
+  {
+    id: 2,
     name: "Football",
     image: "/images/football.png"
   },
   {
-    id: 2,
+    id: 3,
     name: "BasketBall",
     image: "/images/basketball.png"
   },
   {
-    id: 3,
-    name: "Cricket",
-    image: "/images/cricket.png"
-  },
-  {
     id: 4,
-    name: "Hiking",
-    image: "/images/hiking.png"
+    name: "Baseball",
+    image: "/images/baseball.png"
   },
   {
     id: 5,
-    name: "Ping Pong",
-    image: "/images/ping_pong.png"
-  },
-  {
-    id: 6,
     name: "Soccer",
     image: "/images/soccer.png"
   },
   {
+    id: 6,
+    name: "Tennis",
+    image: "/images/tennis.png"
+  },
+  {
     id: 7,
-    name: "Swimming",
-    image: "/images/swimming.png"
+    name: "Golf",
+    image: "/images/golf.png"
   },
   {
     id: 8,
-    name: "Tennis",
-    image: "/images/football.png"
+    name: "Ping Pong",
+    image: "/images/ping_pong.png"
   },
   {
     id: 9,
@@ -46,13 +46,18 @@ const GameList = [
   },
   {
     id: 10,
+    name: "Swimming",
+    image: "/images/swimming.png"
+  },
+  {
+    id: 11,
     name: "Weightlifting",
     image: "/images/weightlifting.png"
   },
   {
-    id: 11,
-    name: "Baseball",
-    image: "/images/baseball.png"
+    id: 12,
+    name: "Hiking",
+    image: "/images/hiking.png"
   }
 ];
 

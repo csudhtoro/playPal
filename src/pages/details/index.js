@@ -2,11 +2,9 @@ import PostDetail from "@/components/Home/PostDetail";
 import React from "react";
 import { useRouter } from "next/router";
 
-function Details() {
+function Detail() {
   const router = useRouter();
-  const post = router.query;
-
-  return <PostDetail post={post} />;
+  return <PostDetail post={router.query} />;
 }
 
-export default Details;
+export default Detail;

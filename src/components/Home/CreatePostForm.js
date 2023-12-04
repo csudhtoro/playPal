@@ -8,11 +8,13 @@ import app from "./../../shared/FirebaseConfig";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Toast from "./Toast";
+import { useRouter } from "next/router";
 
 function CreatePostForm() {
   const { data: session } = useSession();
   const db = getFirestore(app);
   const storage = getStorage(app);
+  const router = useRouter();
 
   const [inputs, setInputs] = useState({});
   const [tags, setTags] = useState([]);
@@ -21,6 +23,7 @@ function CreatePostForm() {
   const [submit, setSubmit] = useState(false);
 
   useEffect(() => {
+    //load all logged in user information on load
     if (session) {
       setInputs((values) => ({ ...values, userName: session.user?.name }));
       setInputs((values) => ({ ...values, userImage: session.user?.image }));
@@ -55,11 +58,10 @@ function CreatePostForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("Submit values: ", inputs);
-    // console.log("Tags selected: ", tags);
-    setShowToast(true);
+    ///setShowToast(true);
     const storageRef = ref(storage, "playPal/" + file?.name);
     console.log(file);
+    //save image selected to Firebase storage
     uploadBytes(storageRef, file)
       .then((snapshot) => {
         console.log("Uploaded a file!");
@@ -76,11 +78,33 @@ function CreatePostForm() {
     //gather the tags and create a tag array for the db
     const InputTags = tags.map((obj) => obj.label);
 
-    // Add a new document in collection "cities"
-    await setDoc(doc(db, "posts", Date.now().toString()), {
+    //set the postId to reversed title string
+    const postId = inputs.title.split("").reverse().join("");
+
+    //save to the current user's owned collection
+    await setDoc(doc(db, "Posts", session.user.email, "PostsOwned", postId), {
       ...inputs,
       tags: InputTags
     });
+
+    //saving post to public collection to show on main page
+    await setDoc(
+      doc(db, "PublicPosts", postId),
+      {
+        ...inputs,
+        tags: InputTags
+      },
+      presentToast()
+    );
+  };
+
+  const presentToast = () => {
+    setShowToast(true);
+
+    setTimeout(() => {
+      setShowToast(false);
+      router.push("/");
+    }, 3000);
   };
 
   return (
@@ -94,14 +118,14 @@ function CreatePostForm() {
         </div>
       ) : null}
       <div className="lg:max-w-[1126px] mx-auto mt-6 mb-6">
-        <h1 className="px-6 text-center lg:text-start text-[1.5rem] font-bold text-orange-600">
+        <h2 className="px-6 text-center lg:text-start text-[2.5rem] font-extrabold text-orange-600">
           CREATE NEW POST
-        </h1>
+        </h2>
         <h2 className="max-w-[560px] mx-auto lg:mx-0 px-6 text-center lg:text-start text-gray-500 font-semibold">
           Create a new post to invite friends, family or strangers to join you
           in your activities!
         </h2>
-        <div className="flex flex-col lg:flex-row lg:flex-wrap gap-3 bg-red-50">
+        <div className="flex flex-col lg:flex-row lg:flex-wrap gap-3">
           <form
             className="px-6 flex flex-col items-center xl:w-1/3"
             onSubmit={handleSubmit}
@@ -126,16 +150,6 @@ function CreatePostForm() {
                 required
                 onChange={handleChange}
               ></textarea>
-            </div>
-            <div className="my-5 w-80 max-w-lg">
-              <input
-                name="slotsAvailable"
-                type="number"
-                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5"
-                placeholder="Number of Participants"
-                required
-                onChange={handleChange}
-              />
             </div>
             <div className="my-5 w-80 max-w-lg">
               <input
