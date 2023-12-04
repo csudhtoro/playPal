@@ -6,24 +6,26 @@ import { useRouter } from "next/router";
 import { LogOut, LogIn, Pencil } from "lucide-react";
 
 const USER_IMAGE =
-  "https://cdn-icons-png.flaticon.com/128/1144/1144709.png?ga=GA1.1.898338224.1699314617&semt=ais";
+  "https://cdn-icons-png.flaticon.com/128/5178/5178994.png?uid=R124143615&ga=GA1.1.1996791833.1701550540&semt=ais";
 
 function Navbar() {
   const router = useRouter();
   const { data: session } = useSession();
 
+  console.log(session?.user);
+
   return (
-    <div className="flex justify-between xl:justify-around p-6 shadow-sm shadow-slate-200 rounded-xl">
+    <div className="flex justify-between xl:justify-around p-6 rounded-xl mb-2 border-b border-slate-200">
       <Link href="/" className="flex items-center gap-2 sm:gap-4">
         <Image
-          src="/logo.png"
+          src="/logo2.png"
           alt="app logo"
           width={60}
           height={60}
           quality={75}
           className="w-10 sm:w-16"
         />{" "}
-        <span className="sm:text-2xl text-[#0356fc] hover:text-[#0339a3] font-bold">
+        <span className="sm:text-2xl text-[#0356fc] hover:text-[#0339a3] font-extrabold font-sans">
           playPal
         </span>
       </Link>
@@ -57,11 +59,11 @@ function Navbar() {
               <LogOut className="sm:hidden" size={18} />
             </button>
             <Image
-              src={session ? session?.user?.image : USER_IMAGE}
+              src={session.user.image ? session?.user?.image : USER_IMAGE}
               alt="user_pic"
               width={47}
               height={47}
-              className="w-9 sm:w-10 rounded-full cursor-pointer"
+              className="w-9 sm:w-10 rounded-full cursor-pointer hover:scale-105"
               onClick={() => router.push("/profile")}
             />
           </>

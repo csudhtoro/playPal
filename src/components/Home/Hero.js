@@ -3,7 +3,7 @@ import React from "react";
 function Hero() {
   return (
     <div className="text-center mb-12">
-      <h1 className="sm:p-5 text-black text-3xl sm:text-[3.5rem] font-extrabold">
+      <h1 className="sm:p-5 text-gray-900 text-3xl sm:text-[3.5rem] font-extrabold">
         Find Activity Partners
       </h1>
       <h2 className="mb-4 sm:mb-6 text-[#0356fc] text-3xl sm:text-[3.5rem] font-extrabold">

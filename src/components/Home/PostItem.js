@@ -37,7 +37,7 @@ function PostItem({ post }) {
                 return (
                   <div
                     key={indx}
-                    className="py-1 px-3 text-[0.7rem] text-black rounded-lg font-semibold bg-slate-100 border-2 border-slate-300 shadow-sm"
+                    className="py-1 px-3 text-[0.7rem] text-gray-900 rounded-lg font-semibold bg-slate-100 border-2 border-slate-400 shadow-sm"
                   >
                     {tag}
                   </div>

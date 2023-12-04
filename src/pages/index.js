@@ -41,7 +41,7 @@ export default function Home() {
   };
 
   return (
-    <div className="px-5 sm:px-7 md:px-10 mt-7 text-center">
+    <div className=" px-5 sm:px-7 md:px-10 pt-6 pb-6 text-center">
       <Hero />
       <Search setQuery={setQuery} />
       <GameList setPosts={setPosts} filteredPosts={filteredPosts} />

@@ -10,6 +10,9 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Toast from "./Toast";
 import { useRouter } from "next/router";
 
+const USER_IMAGE =
+  "https://cdn-icons-png.flaticon.com/128/5178/5178994.png?uid=R124143615&ga=GA1.1.1996791833.1701550540&semt=ais";
+
 function CreatePostForm() {
   const { data: session } = useSession();
   const db = getFirestore(app);
@@ -26,7 +29,10 @@ function CreatePostForm() {
     //load all logged in user information on load
     if (session) {
       setInputs((values) => ({ ...values, userName: session.user?.name }));
-      setInputs((values) => ({ ...values, userImage: session.user?.image }));
+      setInputs((values) => ({
+        ...values,
+        userImage: session.user?.image ? session.user?.image : USER_IMAGE
+      }));
       setInputs((values) => ({ ...values, email: session.user?.email }));
     }
   }, [session]);
@@ -110,7 +116,7 @@ function CreatePostForm() {
   return (
     <div>
       {showToast ? (
-        <div className="absolute top-10 right-10">
+        <div className="absolute top-30 right-10">
           <Toast
             msg={"Post Created Successfully"}
             closeToast={() => setShowToast(false)}
@@ -118,7 +124,7 @@ function CreatePostForm() {
         </div>
       ) : null}
       <div className="lg:max-w-[1126px] mx-auto mt-6 mb-6">
-        <h2 className="px-6 text-center lg:text-start text-[2.5rem] font-extrabold text-orange-600">
+        <h2 className="px-6 text-center lg:text-start text-[2.5rem] font-extrabold text-[#0356fc]">
           CREATE NEW POST
         </h2>
         <h2 className="max-w-[560px] mx-auto lg:mx-0 px-6 text-center lg:text-start text-gray-500 font-semibold">
@@ -135,7 +141,7 @@ function CreatePostForm() {
                 name="title"
                 type="text"
                 id="base-input"
-                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 "
+                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 placeholder="Title..."
                 required
                 onChange={handleChange}
@@ -145,7 +151,7 @@ function CreatePostForm() {
               <textarea
                 name="desc"
                 rows="4"
-                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-500 focus:ring-orange-500 focus:border-orange-500 "
+                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-500 focus:ring-blue-500 focus:border-blue-500 "
                 placeholder="Description..."
                 required
                 onChange={handleChange}
@@ -155,7 +161,7 @@ function CreatePostForm() {
               <input
                 name="date"
                 type="date"
-                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5"
+                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
                 onChange={handleChange}
               />
@@ -164,7 +170,7 @@ function CreatePostForm() {
               <input
                 name="location"
                 type="text"
-                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5"
+                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="Location..."
                 required
                 onChange={handleChange}
@@ -174,7 +180,7 @@ function CreatePostForm() {
               <input
                 name="zipCode"
                 type="text"
-                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5"
+                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="Zip Code..."
                 required
                 onChange={handleChange}
@@ -183,7 +189,7 @@ function CreatePostForm() {
             <div className="my-5 w-80 max-w-lg">
               <select
                 name="activity"
-                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5"
+                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
                 onChange={handleChange}
               >
@@ -200,7 +206,7 @@ function CreatePostForm() {
                 name="tags"
                 theme={multiSelectTheme}
                 options={data2.Options}
-                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-0.5"
+                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-0.5"
                 placeholder="Select Tags..."
                 isSearchable
                 isMulti
@@ -214,14 +220,14 @@ function CreatePostForm() {
               <input
                 type="file"
                 accept="image/gif, image/jpeg, image/png"
-                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5"
+                className="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 onChange={(e) => setFile(e.target.files[0])}
               />
             </div>
             <div className="mt-3 mb-5 w-80 max-w-lg flex justify-center lg:justify-start">
               <button
                 type="submit"
-                className="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full lg:w-auto px-5 py-2.5 text-center"
+                className="text-white bg-[#0356fc] hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full lg:w-auto px-5 py-2.5 text-center"
               >
                 Submit
               </button>

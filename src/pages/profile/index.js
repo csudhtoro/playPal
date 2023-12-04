@@ -59,7 +59,7 @@ function Profile() {
   };
 
   return (
-    <div>
+    <div className="h-screen">
       {showToast ? (
         <div className="absolute top-10 right-10">
           <Toast
@@ -68,11 +68,14 @@ function Profile() {
           />
         </div>
       ) : null}
-      <div className="lg:max-w-[1126px] mx-auto mt-6 mb-6">
+      <div className="lg:max-w-[1126px] mx-auto py-6">
         <h2 className="px-6 text-center lg:text-start text-[3rem] font-extrabold text-[#0356fc]">
-          Profile
+          Profile{" "}
+          <span className="text-gray-900 text-[0.8rem] font-semibold">
+            ({session.user.email})
+          </span>
         </h2>
-        <p className="text-[1rem] font-semibold text-slate-600 px-6 text-center lg:text-start">
+        <p className="text-[1rem] font-semibold text-slate-500 px-6 text-center lg:text-start">
           Manage your posts
         </p>
         <div className="text-center lg:text-center text-[2rem] font-bold text-[#0356fc] border-b-slate-100 border-b-2 px-6 mt-12 py-2">

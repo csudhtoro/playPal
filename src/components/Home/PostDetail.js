@@ -8,15 +8,15 @@ function PostDetail({ post }) {
   //console.log("this is post item in PostDetail:", post);
   //console.log(typeof post.tags);
   return (
-    <div className="max-w-[1126px] mx-auto mt-6 mb-6">
-      <div className="flex justify-end px-6 sm:text-xl text-black font-bold">
-        <div className="flex gap-2 items-center pb-4">
+    <div className="max-w-[1126px] h-screen mx-auto">
+      <div className="flex justify-end px-6 sm:text-xl text-gray-900 font-bold">
+        <div className="flex gap-2 items-center py-4">
           <FaRegCalendarMinus fill="#0356fc" /> July 14th 2023
         </div>
       </div>
       <div className="w-fit px-6">
         <Image
-          className="rounded-lg object-cover w-screen max-h-[40rem] shadow-zinc-400 shadow-md"
+          className="rounded-lg object-cover w-screen max-h-[40rem] shadow-slate-400 shadow-md"
           src={post.image}
           alt="activity image"
           width={966}
@@ -36,8 +36,8 @@ function PostDetail({ post }) {
           </span>
         </div>
         <div className="px-6">
-          <span className="flex items-center gap-2 text-[.6rem] sm:text-sm md:text-lg">
-            Organizer:
+          <span className="flex items-center justify-between gap-2 text-[.6rem] sm:text-sm md:text-lg">
+            <p className="font-bold">Organizer:</p>
             <span className="font-semibold">
               <Image
                 src={post.userImage}
@@ -47,6 +47,7 @@ function PostDetail({ post }) {
                 className="rounded-full"
               />
             </span>
+            <p className="text-sm">{post.userName}</p>
           </span>{" "}
         </div>
       </div>
@@ -65,7 +66,7 @@ function PostDetail({ post }) {
             return (
               <div
                 key={indx}
-                className="py-1 px-3 text-[.7rem] sm:text-[1.3rem] text-black rounded-lg font-bold border-2 bg-gray-100 shadow-sm sm:shadow-sm sm:shadow-gray-400"
+                className="py-1 px-3 text-[.7rem] sm:text-[1.3rem] text-gray-900 rounded-lg font-bold border-2 border-slate-400 bg-slate-100 shadow-sm"
               >
                 {tag}
               </div>
