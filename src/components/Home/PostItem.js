@@ -1,10 +1,16 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { PiMapPinLineDuotone } from "react-icons/pi";
+import { FaMapPin } from "react-icons/fa6";
 
 function PostItem({ post }) {
   const router = useRouter();
+
+  const [serializedTags, setSerializedTags] = useState(
+    JSON.stringify(post.tags)
+  );
+
+  //console.log(serializedTags);
 
   return (
     <div>
@@ -26,7 +32,7 @@ function PostItem({ post }) {
 
             <div className="text-sm flex gap-1 justify-start items-center py-2 font-semibold">
               {" "}
-              <PiMapPinLineDuotone fill="#0356fc" size={20} /> {post.location},{" "}
+              <FaMapPin fill="#0356fc" size={20} /> {post.location},{" "}
               {post.zipCode}
             </div>
             <p className="font-semibold text-slate-500 line-clamp-3 text-ellipsis text-sm">
@@ -39,7 +45,7 @@ function PostItem({ post }) {
                     key={indx}
                     className="py-1 px-3 text-[0.7rem] text-gray-900 rounded-lg font-semibold bg-slate-100 border-2 border-slate-400 shadow-sm"
                   >
-                    {tag}
+                    {tag.label}
                   </div>
                 );
               })}
@@ -48,7 +54,10 @@ function PostItem({ post }) {
             <div className="flex gap-2 justify-between">
               <button
                 onClick={() =>
-                  router.push({ pathname: "/details", query: post })
+                  router.push({
+                    pathname: "/details",
+                    query: { ...post, tags: serializedTags }
+                  })
                 }
                 className="text-white bg-[#0356fc] hover:bg-[#0339a3] focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-xs font-semibold w-full lg:w-auto px-5 py-2.5 text-center "
               >

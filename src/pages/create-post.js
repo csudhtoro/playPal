@@ -1,18 +1,18 @@
-import { useSession } from "next-auth/react";
 import React, { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import { useAuthContext } from "@/context/AuthUserContext";
 
 import CreatePostForm from "@/components/Home/CreatePostForm";
 
 function CreatePost() {
-  const { data: session } = useSession();
+  //const { data: session } = useSession();
+  const { user } = useAuthContext();
   const router = useRouter();
 
   useEffect(() => {
-    if (!session) {
-      router.push("/");
-    }
-  }, []);
+    if (user === null) router.push("/");
+  }, [user]);
+
   return <CreatePostForm />;
 }
 

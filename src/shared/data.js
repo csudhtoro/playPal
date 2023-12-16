@@ -41,7 +41,7 @@ const GameList = [
   },
   {
     id: 9,
-    name: "Walk",
+    name: "Walk/Run",
     image: "/images/walk.png"
   },
   {

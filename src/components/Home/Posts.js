@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PostItem from "./PostItem";
 
 function Posts({ posts }) {
   return (
-    <div className="max-w-[120rem] mx-auto flex flex-wrap justify-center items-start gap-4 sm:gap-6">
+    <div className="max-w-[80rem] mx-auto flex flex-wrap justify-center items-start gap-4 sm:gap-6">
       {posts.map((item, indx) => (
         <div key={indx}>
           <PostItem post={item} />

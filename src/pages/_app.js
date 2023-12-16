@@ -1,19 +1,18 @@
+"use client";
+
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { AuthContextProvider } from "@/context/AuthUserContext";
 import "@/styles/globals.css";
-import { SessionProvider } from "next-auth/react";
 
-export default function App({
-  Component,
-  pageProps: { session, ...pageProps }
-}) {
+export default function App({ Component, pageProps: { ...pageProps } }) {
   return (
     <div>
-      <SessionProvider session={session}>
+      <AuthContextProvider>
         <Navbar />
         <Component {...pageProps} />
         <Footer />
-      </SessionProvider>
+      </AuthContextProvider>
     </div>
   );
 }

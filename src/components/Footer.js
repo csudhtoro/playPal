@@ -3,7 +3,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <div classNameName="mt-10">
+    <div className="mt-10">
       <footer className="p-4  md:p-8 lg:p-10">
         <div className="flex flex-col gap-2 px-6 sm:px-16 mx-auto max-w-[120rem] lg:max-w-screen-xl text-center">
           <ul className="flex flex-wrap justify-center items-center mb-1 text-gray-600">
@@ -45,8 +45,14 @@ function Footer() {
           </ul>
           <p className="text-xs text-gray-600">
             Icons by{" "}
-            <Link href="https://www.freepik.com">
+            <Link href="https://www.freepik.com" target="_blank">
               <span className="text-blue-900 font-bold">Freepik</span>{" "}
+            </Link>
+          </p>
+          <p className="text-xs text-gray-600">
+            Image provided by{" "}
+            <Link href="https://www.unsplash.com" target="_blank">
+              <span className="text-blue-900 font-bold">Unsplash</span>{" "}
             </Link>
           </p>
           <span className="text-sm text-gray-600 sm:text-center">

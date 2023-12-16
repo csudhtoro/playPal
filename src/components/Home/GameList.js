@@ -10,7 +10,7 @@ function GameList({ setPosts, filteredPosts }) {
     //console.log(games);
   }, []);
 
-  //Filter type - burgers, pizza, etc
+  //Filter type - basketball, swimming, tennis, etc...
   const filterType = (category) => {
     console.log(category === "All");
     category === "All"
@@ -28,7 +28,7 @@ function GameList({ setPosts, filteredPosts }) {
         {games?.GameList.map((item) => (
           <button
             key={item.id}
-            className="flex flex-col items-center cursor-pointer"
+            className="flex flex-col items-center cursor-pointer hover:scale-105"
             onClick={() => {
               filterType(item.name);
             }}
@@ -39,7 +39,6 @@ function GameList({ setPosts, filteredPosts }) {
               width={45}
               height={45}
               quality={100}
-              className="hover:animate-bounce transition duration-150"
             />
             <h3 className="text-sm text-center font-semibold">{item.name}</h3>
           </button>

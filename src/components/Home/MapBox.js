@@ -9,7 +9,6 @@ function MapBox({ location }) {
 
   const [locationCoordinates, setLocationCoordinates] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
   const mapRef = useRef();
 
   const getActivityLocation = async () => {
@@ -39,7 +38,7 @@ function MapBox({ location }) {
   }, [isLoading]);
 
   return (
-    <div className="max-w-[700px] object-cover rounded-md overflow-hidden mx-auto w-[90%] lg:w-3/5 border-[0.1rem] border-gray-900 shadow-md shadow-slate-400">
+    <div className="max-w-[700px] object-cover rounded-md overflow-hidden mx-auto w-[90%] lg:w-3/5 border-[0.1rem]  border-slate-500 shadow-md shadow-slate-400">
       <Map
         ref={mapRef}
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACESS_TOKEN}
@@ -56,7 +55,6 @@ function MapBox({ location }) {
             longitude={locationCoordinates?.lng}
             latitude={locationCoordinates?.lat}
             anchor="bottom"
-            className=""
           >
             <FaMapPin color="#0356fc" size={32} />
           </Marker>

@@ -1,9 +1,14 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/shared/FirebaseConfig";
 
 export const authOptions = {
   // Configure one or more authentication providers
+  pages: {
+    signIn: "/signin"
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -11,18 +16,25 @@ export const authOptions = {
     }),
     CredentialsProvider({
       name: "credentials",
-      credentials: {
-        email: { label: "Email", type: "text", placeholder: "email" },
-        password: { label: "Password", type: "password" },
-        username: { label: "Username", type: "text", placeholder: "John Smith" }
-      },
+      credentials: {},
       async authorize(credentials) {
-        const user = {
-          id: 1,
-          name: "Rita Book",
-          email: "ritabook90@gmail.com"
-        };
-        return user;
+        return await signInWithEmailAndPassword(
+          auth,
+          email || "",
+          password || ""
+        )
+          .then((userCredential) => {
+            if (userCredential.user) {
+              return userCredential.user;
+            }
+            return null;
+          })
+          .catch((error) => console.log(error))
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(error);
+          });
       }
     })
   ],
